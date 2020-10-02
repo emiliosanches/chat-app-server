@@ -2,7 +2,7 @@ import Knex from "knex";
 
 export async function up(knex: Knex) {
     return knex.schema.createTable('TBFriends', table => {
-        table.increments('id').notNullable().primary();
+        table.string('id').notNullable().primary();
         table.boolean('accepted').notNullable();
 
         table.string('user1')
