@@ -27,4 +27,20 @@ export class KnexFriendsRepository implements IFriendsRepository {
                     .where('user1', username)
             )
     }
+
+    async alreadyFriends(user1: string, user2: string): Promise<Friendship | undefined> {
+        const result = await knex('TBFriends').where({
+            user1,
+            user2
+        }).orWhere({
+            user1: user2,
+            user2: user1
+        });
+
+        if (result.length === 0) return;
+
+        const friendshipData = result[0];
+
+        return new Friendship(friendshipData.user1, friendshipData.user2, friendshipData.id, friendshipData.accepted);
+    }
 }
