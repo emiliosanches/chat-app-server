@@ -10,18 +10,9 @@ export class CreateUserController {
     async handle(req: Request, res: Response) {
         try {
             await this.useCase.execute(req.body);
+            res.status(201).send();
         } catch (err) {
-            if (err instanceof InvalidValue)
-                return res.status(400).json({
-                    error: err.message,
-                    wrongFields: err.fields
-                });
-            else {
-                console.log(err)
-                return res.status(500).send("An unexpected error ocurred!");
-            }
+            err.handle(res);
         }
-
-        res.status(201).send();
     }
 }

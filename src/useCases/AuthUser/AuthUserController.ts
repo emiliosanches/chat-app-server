@@ -18,7 +18,6 @@ export class AuthUserController {
             });
         } catch (err) {
             if (err instanceof InvalidUsername) {
-                return res.status(401).send();
             }
             
             if (err instanceof WrongPassword) {
