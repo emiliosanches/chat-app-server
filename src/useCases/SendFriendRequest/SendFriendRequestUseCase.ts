@@ -11,7 +11,7 @@ export class SendFriendRequestUseCase {
     ) { }
 
     async execute(data: SendFriendRequestDTO): Promise<void> {
-        const to = await this.usersRepository.findByUsername(data.to_username);
+        const to = await this.usersRepository.findByUsername(data.to_username || '');
         
         if (!to) {
             throw new InvalidUsernameError();
