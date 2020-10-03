@@ -1,7 +1,7 @@
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../../repositories/UsersRepository";
 import { CreateUserRequestDTO } from "./CreateUserRequestDTO";
-import { InvalidValue } from "./CreateUserRequestErrors";
+import { InvalidValue, UnknownError } from "./CreateUserRequestErrors";
 
 export class CreateUserUseCase {
     constructor(
@@ -27,8 +27,8 @@ export class CreateUserUseCase {
 
         try {
             await this.usersRepository.save(user);
-        } catch (err) {
-            throw err;
+        } catch {
+            throw new UnknownError();
         }
     }
 }

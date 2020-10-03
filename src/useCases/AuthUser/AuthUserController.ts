@@ -16,19 +16,10 @@ export class AuthUserController {
                 username,
                 password
             });
+            req.session!.username = req.body.username;
+            return res.status(200).send();
         } catch (err) {
-            if (err instanceof InvalidUsername) {
-            }
-            
-            if (err instanceof WrongPassword) {
-                return res.status(403).send();
-            }
-            console.log(err)
-            return res.status(500).send();
+            return err.handle(res);
         }
-
-        req.session!.username = req.body.username;
-        
-        res.status(200).send();
     }
 }

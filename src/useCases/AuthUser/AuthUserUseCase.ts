@@ -1,6 +1,6 @@
 import { User } from '../../entities/User';
 import { IUsersRepository } from "../../repositories/UsersRepository";
-import { InvalidUsername, WrongPassword } from "./AuthUserRequestErrors";
+import { InvalidUsername, UnknownError, WrongPassword } from "./AuthUserRequestErrors";
 import { AuthUserRequestDTO } from "./AuthUserRequestDTO";
 
 export class AuthUserUseCase {
@@ -15,7 +15,13 @@ export class AuthUserUseCase {
 
         if (!password) throw new WrongPassword();
 
-        const user = await this.usersRepository.findByUsername(username);
+        let user;
+
+        try {
+            user = await this.usersRepository.findByUsername(username);
+        } catch {
+            throw new UnknownError();
+        }
 
         if (!user) {
             throw new InvalidUsername();

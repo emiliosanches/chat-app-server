@@ -14,3 +14,13 @@ export class InvalidValue extends Error {
         });
     }
 }
+
+export class UnknownError extends Error {
+    constructor(message?: string) {
+        super(message || "Unknown Error.");
+    }
+
+    handle(res: Response) {
+        return res.status(500).send("Unknown error.");
+    }
+}
