@@ -2,7 +2,7 @@ import { Friendship } from "../../entities/Friendship";
 import { IFriendsRepository } from "../../repositories/FriendsRepository";
 import { IUsersRepository } from "../../repositories/UsersRepository";
 import { SendFriendRequestDTO } from "./SendFriendRequestDTO";
-import { AlreadyFriendsError, AlreadyHasRequestError, InvalidUsernameError } from "./SendFriendRequestErrors";
+import { AlreadyFriendsError, AlreadyHasRequestError, InvalidUsernameError, UnknownError } from "./SendFriendRequestErrors";
 
 export class SendFriendRequestUseCase {
     constructor(
@@ -29,6 +29,10 @@ export class SendFriendRequestUseCase {
 
         const friendship = new Friendship(data.from_username, data.to_username);
         
-        await this.friendsRepository.save(friendship);
+        try {
+            await this.friendsRepository.save(friendship);
+        } catch {
+            throw new UnknownError();
+        }
     }
 }

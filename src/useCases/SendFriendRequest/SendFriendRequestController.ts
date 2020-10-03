@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { SendFriendRequestUseCase } from './SendFriendRequestUseCase';
-import { InvalidUsernameError, AlreadyHasRequestError, AlreadyFriendsError } from './SendFriendRequestErrors';
 
 export class SendFriendRequestController {
     constructor(
@@ -22,15 +21,7 @@ export class SendFriendRequestController {
 
             res.status(201).send();
         } catch (err) {
-            if (err instanceof InvalidUsernameError) {
-                res.status(400).send("The username is invalid.")
-            } else if (err instanceof AlreadyHasRequestError) {
-                res.status(400).send("There is already a friend request pending.");
-            } else if (err instanceof AlreadyFriendsError) {
-                res.status(400).send("The users are already friends.");
-            } else {
-                res.status(500).send("Unknown error.");
-            }
+            err.handle(res);
         }
     }
 }
