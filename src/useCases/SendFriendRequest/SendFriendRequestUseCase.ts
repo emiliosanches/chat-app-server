@@ -1,8 +1,9 @@
 import { Friendship } from "../../entities/Friendship";
+import { UnknownError } from "../../entities/UnknownError";
 import { IFriendsRepository } from "../../repositories/FriendsRepository";
 import { IUsersRepository } from "../../repositories/UsersRepository";
 import { SendFriendRequestDTO } from "./SendFriendRequestDTO";
-import { AlreadyFriendsError, AlreadyHasRequestError, InvalidUsernameError, UnknownError } from "./SendFriendRequestErrors";
+import { AlreadyFriendsError, AlreadyHasRequestError, InvalidUsernameError } from "./SendFriendRequestErrors";
 
 export class SendFriendRequestUseCase {
     constructor(

@@ -1,7 +1,8 @@
+import { UnknownError } from "../../entities/UnknownError";
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../../repositories/UsersRepository";
 import { CreateUserRequestDTO } from "./CreateUserRequestDTO";
-import { InvalidValue, UnknownError } from "./CreateUserRequestErrors";
+import { InvalidValue } from "./CreateUserRequestErrors";
 
 export class CreateUserUseCase {
     constructor(

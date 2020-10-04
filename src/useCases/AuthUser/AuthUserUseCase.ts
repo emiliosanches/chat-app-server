@@ -1,7 +1,8 @@
 import { User } from '../../entities/User';
 import { IUsersRepository } from "../../repositories/UsersRepository";
-import { InvalidUsername, UnknownError, WrongPassword } from "./AuthUserRequestErrors";
+import { InvalidUsername, WrongPassword } from "./AuthUserRequestErrors";
 import { AuthUserRequestDTO } from "./AuthUserRequestDTO";
+import { UnknownError } from '../../entities/UnknownError';
 
 export class AuthUserUseCase {
     constructor(

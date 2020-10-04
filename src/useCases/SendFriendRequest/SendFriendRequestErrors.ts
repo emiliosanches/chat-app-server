@@ -29,13 +29,3 @@ export class AlreadyHasRequestError extends Error {
         res.status(400).send("There is already a friend request pending.");
     }
 }
-
-export class UnknownError extends Error {
-    constructor(message?: string) {
-        super(message || "An unknown error happened.");
-    }
-
-    handle(res: Response) {
-        res.status(500).send("Unknown error.")
-    }
-}

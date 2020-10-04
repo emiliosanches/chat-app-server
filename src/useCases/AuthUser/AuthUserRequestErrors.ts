@@ -19,13 +19,3 @@ export class WrongPassword extends Error {
         return res.status(403).send();
     }
 }
-
-export class UnknownError extends Error {
-    constructor(message?: string) {
-        super("Unknown error.");
-    }
-
-    handle(res: Response) {
-        res.status(500).send("Unknown error.");
-    }
-}
