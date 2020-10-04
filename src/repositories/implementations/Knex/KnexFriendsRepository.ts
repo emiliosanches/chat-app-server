@@ -8,8 +8,12 @@ export class KnexFriendsRepository implements IFriendsRepository {
         return knex('TBFriends').insert(data);
     }
 
-    update(data: Partial<Friendship>): Promise<void> {
-        return knex('TBFriends').update(data);
+    update(data: Partial<Friendship> & Pick<Friendship, 'id'>): Promise<void> {
+        return knex('TBFriends').where('id', data.id).update(data);
+    }
+
+    delete(id: string): Promise<any> {
+        return knex('TBFriends').delete().where('id', id);
     }
 
     index(username: string): Promise<User[]> {
