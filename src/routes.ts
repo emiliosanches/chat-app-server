@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { answerFriendRequestController } from './useCases/AnswerFriendRequest';
 import { authUserController } from './useCases/AuthUser';
 import { createUserController } from './useCases/CreateUser';
+import { getFriendRequestsController } from './useCases/GetFriendRequests';
 import { getLoggedController } from './useCases/GetLogged';
 import { logoutController } from "./useCases/Logout";
 import { sendFriendRequestController } from './useCases/SendFriendRequest';
@@ -12,6 +13,7 @@ router.get('/logged', (req, res) => getLoggedController.handle(req, res));
 router.post('/signup', (req, res) => createUserController.handle(req, res));
 router.post('/auth', (req, res) => authUserController.handle(req, res));
 router.delete('/logout', (req, res) => logoutController.handle(req, res));
+router.get('/friend-request', (req, res) => getFriendRequestsController.handle(req, res));
 router.post('/friend-request', (req, res) => sendFriendRequestController.handle(req, res));
 router.patch('/friend-request/:id', (req, res) => answerFriendRequestController.handle(req, res));
 
